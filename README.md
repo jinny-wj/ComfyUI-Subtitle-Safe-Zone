@@ -6,6 +6,20 @@
 
 输入视频帧 → 评估整段的候选字幕区域 → 输出坐标、区域遮罩、预览和检查结果。
 
+## 效果示例
+
+导入 [示例工作流 JSON](examples/subtitle-safe-zone.json)，无需额外图片或视频即可运行。工作流使用 8 帧 640×360 的纯色测试画面，并把下半幅设置为白色保护遮罩。
+
+**下半幅受保护：** 即使位置偏好为底部，节点仍把推荐字幕框移到上方可用区域。绿色表示所有检查帧满足遮罩覆盖阈值。
+
+![下半幅受保护时的字幕区域推荐](examples/safe-zone-preview.png)
+
+**全画面受保护：** 下图是失败案例。橙色框表示未找到满足遮挡阈值的候选位置，不能把它当成安全区域。可将工作流的全画幅 SolidMask 值设为 1 来复现。
+
+![全画面受保护时的失败提示](examples/fully-blocked-preview.png)
+
+这些是节点实际输出的调试预览，绿色/橙色框不是烧录字幕。本节点只规划区域。
+
 ## 安装
 
 在 `ComfyUI/custom_nodes/` 中执行 `git clone https://github.com/jinny-wj/ComfyUI-Subtitle-Safe-Zone.git`，保存工作流后重启 ComfyUI。搜索 `Subtitle Safe Zone` 或 `视频字幕稳定避让`。
